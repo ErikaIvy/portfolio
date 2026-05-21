@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mehdi Samiee · Professional Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#191919;
+    --paper:#f4f3ee;
+    --paper-2:#eeece2;
+    --muted:#6b6860;
+    --line:#e1dfd4;
+    --line-strong:#c7c4b4;
+    --accent:#c15f3c;
+    --accent-deep:#191919;
+    --clay:#c15f3c;
+    --card:#fbfaf5;
+    --rail:#d6d3c3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;
+    font-size:23px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent);color:#fff;}
+
+  .mono{font-family:"IBM Plex Mono",monospace;}
+
+  .shell{
+    max-width:1360px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:260px 1fr 110px;
+    gap:0;
+  }
+  .rail{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    padding:3rem 1.6rem 2rem 1.8rem;
+    border-right:1px solid var(--line);
+    overflow:auto;
+  }
+  .rail-right{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    padding:3rem 0.6rem 2rem 0.6rem;
+    border-left:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:1.4rem;
+  }
+  .rail-right .yr{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:1.25rem;
+    font-weight:500;
+    letter-spacing:0.42em;
+    color:var(--ink);
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    text-transform:uppercase;
+    line-height:1.4;
+  }
+  .rail-right .dot{
+    width:12px;height:12px;border-radius:50%;
+    background:var(--clay);
+    flex-shrink:0;
+  }
+  .rail-right .tick{
+    width:1px;flex:1;background:var(--line-strong);
+    min-height:60px;
+  }
+  .rail .label{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:0.8rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:2.2rem;
+    padding-bottom:1rem;
+    border-bottom:1px solid var(--line);
+  }
+  .rail ol{
+    list-style:none;
+    position:relative;
+    padding-left:0.4rem;
+  }
+  .rail ol::before{
+    content:"";
+    position:absolute;
+    left:0.6rem;
+    top:1rem;
+    bottom:1rem;
+    width:2px;
+    background:var(--rail);
+    border-radius:2px;
+  }
+  .rail li{
+    font-family:"IBM Plex Mono",monospace;
+    line-height:1.35;
+    color:var(--muted);
+    padding:0.9rem 0 0.9rem 1.8rem;
+    position:relative;
+    cursor:pointer;
+    transition:transform .2s ease;
+  }
+  .rail li::before{
+    content:"";
+    position:absolute;
+    left:0.6rem;
+    top:1.2rem;
+    width:14px;height:14px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--rail);
+    transform:translateX(-50%);
+    transition:background .2s, border-color .2s, transform .2s, box-shadow .2s;
+    z-index:1;
+  }
+  .rail li b{
+    display:block;
+    color:var(--ink);
+    font-size:1.1rem;
+    font-weight:600;
+    letter-spacing:0.005em;
+    margin-bottom:0.2rem;
+    transition:color .2s;
+  }
+  .rail li span{
+    color:var(--muted);
+    font-weight:400;
+    font-size:0.84rem;
+    letter-spacing:0.02em;
+    line-height:1.4;
+  }
+  .rail li:hover b{color:var(--clay);}
+  .rail li:hover::before{border-color:var(--clay);}
+  .rail li.on::before{
+    background:var(--clay);
+    border-color:var(--clay);
+    transform:translateX(-50%) scale(1.2);
+    box-shadow:0 0 0 5px rgba(193,95,60,0.15);
+  }
+  .rail li.on b{color:var(--clay);}
+  .rail li.on span{color:var(--ink);}
+
+  .content{padding:0 0 4rem;min-width:0;}
+  .wrap{max-width:680px;padding:0 2rem;}
+
+  header{padding:4.5rem 0 3rem;border-bottom:1px solid var(--line);}
+  .kicker{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:0.98rem;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:1.4rem;
+  }
+  h1{
+    font-family:"Fraunces",serif;font-weight:500;
+    font-size:clamp(2.6rem,5.4vw,3.8rem);line-height:1.05;
+    letter-spacing:-0.02em;margin-bottom:1.2rem;
+    white-space:nowrap;
+  }
+  .sub{font-size:1.34rem;color:var(--muted);font-style:italic;max-width:34ch;line-height:1.45;}
+  .byline{
+    margin-top:2rem;font-family:"IBM Plex Mono",monospace;
+    font-size:0.98rem;letter-spacing:0.02em;color:var(--muted);line-height:1.9;
+  }
+  .byline strong{color:var(--ink);font-weight:600;}
+
+  section{padding:3rem 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:0.92rem;letter-spacing:0.16em;
+    text-transform:uppercase;color:var(--clay);margin-bottom:1.4rem;
+  }
+  h2{
+    font-family:"Fraunces",serif;font-weight:500;
+    font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.12;
+    letter-spacing:-0.01em;margin-bottom:1.4rem;
+  }
+  p{margin-bottom:1.25rem;}
+  p:last-child{margin-bottom:0;}
+  .lede{font-size:1.28rem;line-height:1.5;}
+  .lede::first-letter{
+    font-family:"Fraunces",serif;font-size:3.4rem;line-height:0.78;float:left;
+    padding:0.08em 0.12em 0 0;color:var(--accent);font-weight:600;
+  }
+  .pull{
+    font-family:"Fraunces",serif;font-weight:500;font-size:clamp(1.45rem,4vw,1.95rem);
+    line-height:1.25;color:var(--accent-deep);border-left:3px solid var(--clay);
+    padding:0.2rem 0 0.2rem 1.4rem;margin:2.4rem 0;font-style:italic;
+  }
+
+  .metrics{
+    background:var(--accent-deep);
+    color:#f5f4ee;
+    border:none;
+    margin:0.8rem 1.5rem;
+    padding:1.4rem 0;
+    border-radius:20px;
+  }
+  .metrics .wrap{max-width:840px;}
+  .metrics .eyebrow{color:#e08a6c;margin-bottom:0.8rem;}
+  .metric-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:1px;background:rgba(245,244,238,0.16);
+    border:1px solid rgba(245,244,238,0.16);margin-top:0.3rem;
+    border-radius:14px;overflow:hidden;
+  }
+  .metric{
+    background:var(--accent-deep);padding:1rem 1.4rem;
+  }
+  .metric .num{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:1.9rem;line-height:1;color:#fff;letter-spacing:-0.02em;
+  }
+  .metric .cap{
+    font-family:"IBM Plex Mono",monospace;font-size:0.82rem;letter-spacing:0.05em;
+    text-transform:uppercase;color:#b8b3a6;margin-top:0.35rem;line-height:1.45;
+  }
+  .metrics .foot{
+    font-family:"IBM Plex Mono",monospace;font-size:0.78rem;letter-spacing:0.08em;
+    color:#8f8b80;text-align:right;margin-top:0.5rem;text-transform:uppercase;
+  }
+
+  .contrast{
+    display:grid;grid-template-columns:1fr 1fr;align-items:start;
+    gap:2.8rem;margin:2rem 0 1rem;
+    background:transparent;border:none;border-radius:0;overflow:visible;
+  }
+  .col{padding:0;background:transparent;}
+  .col-head{
+    border-top:3px solid var(--clay);
+    padding-top:0.9rem;
+    margin-bottom:1.3rem;
+  }
+  .col h4{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:1.85rem;line-height:1.05;letter-spacing:-0.015em;
+    color:var(--ink);text-transform:none;margin-bottom:0.35rem;
+  }
+  .col .col-sub{
+    font-family:"IBM Plex Mono",monospace;font-size:0.78rem;letter-spacing:0.18em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .col ul{list-style:none;counter-reset:item;}
+  .col li{
+    font-size:1.04rem;line-height:1.5;color:var(--ink);
+    padding:0.55rem 0;border-bottom:none;
+    counter-increment:item;
+    display:grid;grid-template-columns:2.2rem 1fr;gap:0.4rem;align-items:start;
+  }
+  .col li::before{
+    content:counter(item, decimal-leading-zero);
+    font-family:"IBM Plex Mono",monospace;font-size:0.75rem;letter-spacing:0.08em;
+    color:var(--clay);padding-top:0.32rem;
+  }
+  .col li:last-child{border-bottom:none;}
+  .vs{display:none;}
+  .cap-fig{
+    font-family:"IBM Plex Mono",monospace;font-size:0.78rem;letter-spacing:0.02em;
+    color:var(--ink);margin-top:0.9rem;font-style:normal;line-height:1.5;opacity:0.78;
+  }
+
+  .converge{margin:1.6rem 0 0.6rem;border:1px solid var(--line-strong);background:var(--card);padding:1.6rem 1.4rem 1.8rem;border-radius:16px;}
+  .converge .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem;}
+  .node{
+    border:1px solid var(--line-strong);padding:0.9rem 1rem;background:var(--paper);border-radius:12px;
+  }
+  .node .t{font-family:"IBM Plex Mono",monospace;font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;}
+  .node .d{font-size:1.02rem;line-height:1.4;}
+  .converge .arrow{text-align:center;font-family:"IBM Plex Mono",monospace;font-size:0.86rem;color:var(--clay);letter-spacing:0.08em;margin-bottom:1rem;}
+  .lens{
+    text-align:center;border:1px dashed var(--clay);background:rgba(204,120,92,0.08);
+    padding:1rem;font-family:"IBM Plex Mono",monospace;font-size:0.9rem;letter-spacing:0.02em;color:var(--accent-deep);line-height:1.7;border-radius:12px;
+  }
+  .lens b{color:var(--clay);}
+
+  .pieces .wrap{max-width:none;margin:0 1.5rem;padding:0;}
+  .card{
+    background:transparent;border:none;
+    border-top:1px solid var(--line);border-radius:0;
+    padding:2.6rem 0 2.4rem;margin:0;
+    display:grid;grid-template-columns:108px 1fr;gap:2rem;
+    align-items:start;
+    transition:none;will-change:auto;
+  }
+  .card:hover{transform:none;box-shadow:none;border-color:var(--line);}
+  .card:first-of-type{border-top:none;padding-top:1.2rem;}
+  .card .card-num{
+    font-family:"Fraunces",serif;font-weight:500;
+    font-size:3.6rem;line-height:0.95;
+    color:var(--clay);letter-spacing:-0.04em;padding-top:0.2rem;
+  }
+  .card-main{min-width:0;}
+  .card .card-type{
+    font-family:"IBM Plex Mono",monospace;font-size:0.78rem;letter-spacing:0.2em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:0.55rem;
+  }
+  .card h3{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:1.5rem;line-height:1.2;letter-spacing:-0.005em;
+    margin-bottom:0.55rem;
+  }
+  .card .card-meta{
+    font-family:"IBM Plex Mono",monospace;font-size:0.86rem;letter-spacing:0.02em;
+    color:var(--muted);margin-bottom:1.2rem;line-height:1.5;
+  }
+  .card .card-body{
+    font-size:1.05rem;line-height:1.65;margin:0 0 1.5rem;
+  }
+  .card-shift{
+    padding-top:1.3rem;border-top:1px solid var(--line);
+    display:grid;gap:1rem;
+  }
+  .shift-row{
+    display:grid;grid-template-columns:7rem 1fr;gap:1rem;align-items:baseline;
+  }
+  .shift-lab{
+    font-family:"IBM Plex Mono",monospace;font-size:0.76rem;letter-spacing:0.16em;
+    text-transform:uppercase;color:var(--muted);padding-top:0.35rem;white-space:nowrap;
+  }
+  .shift-from .shift-val{
+    font-size:0.98rem;line-height:1.55;color:#5a5650;
+  }
+  .shift-to .shift-lab{color:var(--clay);}
+  .shift-to .shift-val{
+    font-family:"Fraunces",serif;font-weight:500;font-style:italic;
+    font-size:1.2rem;line-height:1.4;color:var(--ink);letter-spacing:-0.005em;
+  }
+
+  /* ---------- STUDY DIAGRAM (card 03) ---------- */
+  .study{
+    margin:0.8rem 0 1.4rem;
+  }
+  .study-q{
+    border:1px solid var(--line-strong);
+    border-radius:10px;
+    background:var(--card);
+    padding:0.95rem 1.1rem 1.05rem;
+    margin-bottom:1.3rem;
+  }
+  .study-q-lab{
+    font-family:"IBM Plex Mono",monospace;font-size:0.72rem;letter-spacing:0.2em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;
+  }
+  .study-q-text{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:1.08rem;line-height:1.35;color:var(--ink);letter-spacing:-0.005em;
+  }
+  .study-model{
+    display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;gap:1rem;
+    position:relative;margin-bottom:1.3rem;
+  }
+  .study-var{
+    text-align:center;
+    padding:0.8rem 0.7rem;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+  }
+  .study-var-t{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:1rem;color:var(--ink);margin-bottom:0.2rem;line-height:1.2;
+  }
+  .study-var-s{
+    font-family:"IBM Plex Mono",monospace;font-size:0.72rem;
+    color:var(--muted);letter-spacing:0.02em;
+  }
+  .study-arrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:1.5rem;color:var(--clay);line-height:1;
+  }
+  .study-mod{
+    grid-column:1 / -1;justify-self:center;
+    text-align:center;margin-top:0.1rem;
+    padding:0.45rem 0.9rem 0;border-top:1px dashed var(--line-strong);
+  }
+  .study-mod-t{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:0.92rem;color:var(--ink);
+  }
+  .study-mod-s{
+    font-family:"IBM Plex Mono",monospace;font-size:0.66rem;
+    letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);
+  }
+  .study-results{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:0.7rem;margin-bottom:0.9rem;
+  }
+  .study-stat{
+    text-align:center;
+    padding:0.95rem 0.45rem 0.85rem;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+  }
+  .study-stat-hi{
+    border-color:var(--clay);
+    background:rgba(193,95,60,0.06);
+  }
+  .study-num{
+    font-family:"Fraunces",serif;font-weight:700;
+    font-size:1.65rem;line-height:1;color:var(--ink);
+    letter-spacing:-0.02em;margin-bottom:0.45rem;
+  }
+  .study-num-word{
+    font-weight:600;font-style:italic;
+    font-size:1.3rem;color:var(--clay);
+  }
+  .study-stat-l{
+    font-family:"IBM Plex Mono",monospace;font-size:0.7rem;
+    letter-spacing:0.04em;color:var(--muted);line-height:1.3;
+    margin-bottom:0.15rem;
+  }
+  .study-stat-m{
+    font-family:"IBM Plex Mono",monospace;font-size:0.68rem;
+    color:var(--muted);line-height:1.3;
+  }
+  .study-stat-hi .study-stat-l,
+  .study-stat-hi .study-stat-m{color:#a14e30;}
+  .study-foot{
+    font-family:"IBM Plex Mono",monospace;font-size:0.72rem;
+    letter-spacing:0.04em;color:var(--muted);
+  }
+  @media(max-width:680px){
+    .study-results{grid-template-columns:repeat(2,1fr);}
+    .study-model{grid-template-columns:1fr;gap:0.6rem;}
+    .study-arrow{transform:rotate(90deg);justify-self:center;}
+    .study-mod{grid-column:1;}
+    .study-num{font-size:1.4rem;}
+    .study-num-word{font-size:1.15rem;}
+  }
+
+  footer{
+    padding:2.6rem 0 1rem;
+    font-family:"IBM Plex Mono",monospace;font-size:0.92rem;letter-spacing:0.02em;
+    color:var(--muted);line-height:1.9;
+  }
+  footer strong{color:var(--ink);font-weight:600;}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+  .no-js .reveal{opacity:1;transform:none;}
+
+  .scene{
+    margin:1.1rem 0 0.4rem;border:1px solid var(--line-strong);
+    border-radius:16px;overflow:hidden;background:var(--card);
+  }
+  .scene svg{display:block;width:100%;height:auto;}
+  .scene img{display:block;width:100%;max-height:420px;object-fit:cover;}
+  .scene-cap{
+    font-family:"IBM Plex Mono",monospace;font-size:0.78rem;letter-spacing:0.04em;
+    color:var(--muted);padding:0.7rem 1.1rem;border-top:1px solid var(--line);
+    text-transform:uppercase;
+  }
+
+  /* ---------- HERO: VU PHOTO ---------- */
+  .hero-photo{
+    margin:0.4rem 1.5rem 0;
+    overflow:hidden;
+    border-radius:20px;
+  }
+  .hero-photo img{
+    display:block;width:100%;height:340px;object-fit:cover;object-position:center 55%;
+  }
+  .hero-cap{
+    font-family:"Newsreader",serif;font-style:italic;
+    font-size:0.98rem;color:var(--muted);
+    padding:0.85rem 2rem 0;
+    line-height:1.5;
+  }
+
+  /* ---------- CANAL ACCENT ---------- */
+  .canal-accent{
+    margin:0.8rem 1.5rem;
+    border:1px solid var(--line-strong);
+    border-radius:20px;
+    overflow:hidden;
+    background:var(--card);
+  }
+  .canal-accent img{
+    display:block;width:100%;height:340px;object-fit:cover;object-position:center 60%;
+  }
+  .canal-accent .cap{
+    font-family:"IBM Plex Mono",monospace;font-size:0.78rem;letter-spacing:0.04em;
+    color:var(--muted);padding:0.7rem 1.1rem;border-top:1px solid var(--line);
+    text-transform:uppercase;
+  }
+
+  /* ---------- CLEAN SCORE BLOCK ---------- */
+  .score{
+    text-align:center;
+    padding:3.8rem 1.5rem 3.2rem;
+  }
+  .score-num{
+    font-family:"Fraunces",serif;
+    font-size:80px;
+    font-weight:500;
+    letter-spacing:-0.04em;
+    line-height:1;
+    color:var(--ink);
+  }
+  .score-rule{
+    width:60px;height:1px;background:var(--clay);
+    margin:1.6rem auto 1.3rem;
+  }
+  .score-cap{
+    font-family:"Newsreader",serif;
+    font-style:italic;
+    font-size:1.5rem;
+    color:#3a3530;
+    max-width:620px;
+    margin:0 auto;
+    line-height:1.45;
+  }
+
+  /* ---------- DIPTYCH (helped / hurt) ---------- */
+  .diptych{
+    display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;
+    margin:0.4rem 0 0.6rem;
+  }
+  .dip{padding:0.3rem 0 0.3rem 1.4rem;border-left:2px solid var(--line-strong);}
+  .dip-helped{border-left-color:#739d88;}
+  .dip-hurt{border-left-color:var(--clay);}
+  .dip-eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:0.84rem;letter-spacing:0.14em;
+    text-transform:uppercase;margin-bottom:1rem;
+  }
+  .dip-helped .dip-eyebrow{color:#5a8170;}
+  .dip-hurt .dip-eyebrow{color:var(--clay);}
+  .dip-head{
+    font-family:"Fraunces",serif;font-weight:500;font-style:italic;
+    font-size:1.32rem;line-height:1.3;color:var(--ink);
+    letter-spacing:-0.005em;margin-bottom:1.2rem;
+  }
+  .dip p{
+    font-size:1rem;line-height:1.7;color:var(--ink);
+    margin:0 0 0.85rem;opacity:0.92;
+  }
+  .dip p:last-child{margin-bottom:0;}
+
+  /* ---------- VU MARKER ---------- */
+  .vu-marker{
+    display:flex;align-items:flex-start;gap:1.2rem;
+    padding:1.5rem 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    margin:0.4rem 0;
+  }
+  .vu-mark{
+    width:56px;height:56px;flex-shrink:0;
+    border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Fraunces",serif;font-weight:600;font-size:1.45rem;
+    letter-spacing:0.02em;color:var(--ink);background:var(--paper-2);
+  }
+  .vu-body{flex:1;min-width:0;}
+  .vu-eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:0.78rem;letter-spacing:0.18em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;
+  }
+  .vu-line{font-size:1.05rem;line-height:1.4;color:var(--ink);margin-bottom:0.3rem;}
+  .vu-thesis{font-style:italic;font-size:0.96rem;line-height:1.5;color:var(--muted);}
+
+  /* ---------- FOOTER STANDALONE ---------- */
+  .site-foot{
+    padding:3rem 0 1.4rem;
+    border-top:1px solid var(--line);
+    font-family:"IBM Plex Mono",monospace;font-size:0.92rem;letter-spacing:0.02em;
+    color:var(--muted);line-height:1.9;
+  }
+  .site-foot strong{color:var(--ink);font-weight:600;}
+  .site-foot .credits{
+    margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);
+    font-size:0.78rem;letter-spacing:0.04em;color:var(--muted);
+  }
+
+  /* ---------- SECTION RHYTHM ---------- */
+  header{padding:5.2rem 0 2.6rem;}
+  section.tight{padding:2.2rem 0;}
+  section.open{padding:4rem 0;}
+  section.close{padding:4rem 0 1rem;border-bottom:none;}
+
+  @media(max-width:1180px){
+    .shell{grid-template-columns:200px 1fr;}
+    .rail-right{display:none;}
+  }
+  @media(max-width:860px){
+    .shell{grid-template-columns:1fr;}
+    .rail{display:none;}
+    .rail-right{display:none;}
+    h1{white-space:normal;}
+    .wrap{padding:0 1.5rem;}
+    .metric-grid{grid-template-columns:repeat(2,1fr);}
+    .hero-photo img{height:240px;}
+    .canal-accent img{height:180px;}
+  }
+  @media(max-width:680px){
+    .diptych{grid-template-columns:1fr;gap:1.4rem;}
+  }
+  @media(max-width:520px){
+    body{font-size:18px;}
+    .contrast{grid-template-columns:1fr;gap:1.8rem;}
+    .col h4{font-size:1.55rem;}
+    .col li{grid-template-columns:2rem 1fr;}
+    .converge .row{grid-template-columns:1fr;}
+    .metric-grid{grid-template-columns:1fr;}
+    .card{grid-template-columns:1fr;gap:0.5rem;padding:2rem 0 1.6rem;}
+    .card .card-num{font-size:2.6rem;}
+    .shift-row{grid-template-columns:1fr;gap:0.2rem;}
+    .shift-lab{padding-top:0;}
+    .shift-to .shift-val{font-size:1.05rem;}
+    .metric .num{font-size:1.6rem;}
+    h1{font-size:clamp(2.2rem,10vw,3rem);}
+    .hero-photo img{height:180px;}
+    .canal-accent img{height:150px;}
+    .score-num{font-size:64px;}
+    .score-cap{font-size:1.2rem;}
+    .vu-marker{flex-direction:column;gap:0.9rem;}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <nav class="rail">
+    <ol>
+      <li data-t="s-open" class="on"><b>Iran</b><span>15 years, FMCG</span></li>
+      <li data-t="s-move"><b>2023</b><span>The move</span></li>
+      <li data-t="s-score"><b>Assessment</b><span>2 out of 5</span></li>
+      <li data-t="s-helped"><b>Experience</b><span>helped &amp; hindered</span></li>
+      <li data-t="s-pieces"><b>The work</b><span>six pieces</span></li>
+      <li data-t="s-next"><b>Next</b><span>translation</span></li>
+    </ol>
+  </nav>
+
+  <div class="content">
+
+    <header id="s-open">
+      <div class="wrap">
+        <div class="kicker reveal">Professional Portfolio · 2025–2026</div>
+        <h1 class="reveal">Translating Experience</h1>
+        <p class="sub reveal">Notes on rebuilding professional judgment in a new system.</p>
+        <div class="byline reveal">
+          <strong>Mehdi Samiee</strong><br>
+          MSc International Management · Vrije Universiteit Amsterdam
+        </div>
+      </div>
+      <div class="hero-photo reveal">
+        <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=2400&q=80&auto=format&fit=crop" alt="Library interior with books on shelves" loading="eager">
+      </div>
+    </header>
+
+    <section class="tight">
+      <div class="wrap">
+        <p class="lede reveal">For fifteen years I ran national sales and distribution for an international company in Iran, a market where almost every decision was shaped from the outside: sanctions on supply, regulation on pricing, currency controls on how partners were paid. You learned to move quickly on incomplete information, protect the team, and value what you could actually count over what looked clean in theory. I assumed those instincts were simply what good management looked like.</p>
+      </div>
+    </section>
+
+    <div class="metrics">
+      <div class="wrap">
+        <div class="eyebrow reveal">Where I started</div>
+        <div class="metric-grid reveal">
+          <div class="metric"><div class="num">15 yrs</div><div class="cap">Senior FMCG experience</div></div>
+          <div class="metric"><div class="num">8</div><div class="cap">Direct reports</div></div>
+          <div class="metric"><div class="num">~150</div><div class="cap">Indirect reports</div></div>
+        </div>
+        <div class="foot reveal">National Sales &amp; Distribution Manager · Iran</div>
+      </div>
+    </div>
+
+    <section id="s-move">
+      <div class="wrap">
+        <div class="eyebrow reveal">2023 · the move</div>
+        <p class="reveal">When I moved to the Netherlands in 2023, I assumed that experience would transfer. Instead I found that competence is read through institutions and culture. I had operated in a high-friction, low-information commercial environment, and I was now entering one of the most structured, low-context systems in Europe. Behaviours that signalled maturity in Iran did not always carry the same meaning here.</p>
+
+        <div class="contrast reveal">
+          <div class="col left">
+            <div class="col-head">
+              <h4>Iran</h4>
+              <div class="col-sub">Where I learned</div>
+            </div>
+            <ul>
+              <li>High friction, low information</li>
+              <li>Decisions under sanctions and inflation</li>
+              <li>Relationships over clean models</li>
+              <li>Move fast on incomplete data</li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="col-head">
+              <h4>Netherlands</h4>
+              <div class="col-sub">Where I arrived</div>
+            </div>
+            <ul>
+              <li>Structured, low-context system</li>
+              <li>Process and explicit reasoning</li>
+              <li>Independence read as competence</li>
+              <li>Same behaviour, different meaning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="canal-accent reveal">
+      <img src="amsterdam-canal-hero.jpg" alt="Amsterdam canal" loading="lazy">
+      <div class="cap">Amsterdam · the city I moved to in 2023</div>
+    </div>
+
+    <section id="s-score" class="open">
+      <div class="wrap">
+        <div class="eyebrow reveal">The assessment</div>
+        <p class="reveal">A year later I applied for my first serious job in the Netherlands. The process reached a pre-interview assessment, and I completed it confidently, drawing on years of managerial experience.</p>
+      </div>
+
+      <div class="score reveal">
+        <div class="score-num">2 / 5</div>
+        <div class="score-rule"></div>
+        <div class="score-cap">Pre-interview assessment score. Consensus-seeking, group decision-making, and careful communication, the behaviours I considered strengths, were read as weaknesses in the Dutch context.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="pull reveal">The same actions that signalled maturity in Iran signalled a lack of independence here. Same behaviour, opposite reading.</p>
+        <p class="reveal">That result is the reason this portfolio exists. My first reaction was to argue with it. My second, after a few days, was different. I decided that the defaults which had served me for fifteen years did not transfer automatically, and that I needed to learn what works here rather than insist on what had worked there. I registered for a pre-master programme, started Dutch classes, and was later accepted into the VU's International Management track. My second daughter was born ten days before classes began. The year I am describing was also the first year of an infant's life, and little of it happened in the quiet a student is supposed to have.</p>
+        <p class="reveal">The central thing I learned this year is not a new skill. It is that professional experience can accelerate judgment, but it can also narrow it. It made me notice which of my defaults still helped me, which had quietly become limitations, and which needed to be rebuilt for a different professional system.</p>
+      </div>
+    </section>
+
+    <section id="s-helped">
+      <div class="wrap" style="max-width:840px;">
+        <div class="diptych reveal">
+          <div class="dip dip-helped">
+            <div class="dip-eyebrow">Where experience helped</div>
+            <div class="dip-head">Experience was an asset here because the academic layer was attaching itself to practice I already had.</div>
+            <p>In the International Management course, the material described ground I had been walking for fifteen years: market entry, distribution strategy, multi-country coordination. What I had not done was understand the theory beneath them.</p>
+            <p>At my company, the frameworks came down from headquarters and my job was to apply them well in Iran. In the classroom I worked with the literature those frameworks were built on, and for the first time I could see why the structures I had used were shaped the way they were.</p>
+          </div>
+          <div class="dip dip-hurt">
+            <div class="dip-eyebrow">Where experience got in the way</div>
+            <div class="dip-head">Knowing how to use a term in practice is not the same as understanding it in theory.</div>
+            <p>Where experience got in the way was sometimes in small things. In the Global Innovation and Entrepreneurship course, I confidently mixed up the academic definitions of strategy and business plan. For fifteen years I had used both words on the job, loosely and interchangeably, and it had never caused a problem. The course treated them as distinct concepts with precise meanings, and my practical habit was simply wrong by that standard. A minor error, but it made the larger point: experience had given me a working vocabulary that felt correct, and part of this year was discovering where it did not line up with the academic one.</p>
+            <p>The Leadership course pressed the same point harder. Quiet listening read as respect in Iran can read as disengagement here, and a consistent style I had treated as authenticity sometimes needs to flex to context.</p>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:2.8rem;padding-top:2rem;border-top:1px solid var(--line);">
+          <div class="eyebrow">A different world</div>
+          <p>When I last studied, in 2004, learning was built around the teacher. If you missed a class you were behind, with no way to recover the content. Twenty years later, AI tools summarise a week of readings, generate practice questions, and let a student interrogate the material before an exam in a way that simply did not exist. My younger classmates take it for granted because they have never known anything else. The speed is real, and so is the risk. More than once I read a passage I had drafted with AI assistance and found it fluent but flat, technically correct but missing the specificity that comes from having actually done the work. The text no longer sounded like me, and I rewrote it. Knowing when to stop the machine is its own translation, same as knowing when to stop applying old defaults.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pieces" id="s-pieces">
+      <div class="wrap">
+        <div class="eyebrow reveal">Where the translation happened</div>
+        <h2 class="reveal">Six pieces of work</h2>
+        <p class="reveal" style="color:var(--muted);max-width:54ch;margin-bottom:2rem;">Each is described through what the work was, what I assumed going in, and what changed in how I think.</p>
+
+        <div class="card reveal">
+          <div class="card-num">01</div>
+          <div class="card-main">
+            <div class="card-type">Thesis</div>
+            <h3>Master thesis: governance tensions in emerging-market alliances</h3>
+            <div class="card-meta">Qualitative comparative case study · Gioia method · Supervisor: Dr. Yueling Zhou</div>
+            <p class="card-body">A comparison of the Walmart-Bharti (2007-2013) and Tesco-Trent (2008-2018) retail joint ventures in India, read through institutional theory, transaction cost economics, and organizational learning, with structured coding adapted from Gioia. The question: how multinational firms balance staying compliant with local rules against actually learning from a local partner when they enter through an alliance.</p>
+            <div class="card-shift">
+              <div class="shift-row shift-from">
+                <div class="shift-lab">Assumed</div>
+                <div class="shift-val">That a thesis would mainly be a writing task, and that fifteen years of making business decisions would carry me through analysing how other firms made theirs.</div>
+              </div>
+              <div class="shift-row shift-to">
+                <div class="shift-lab">Changed</div>
+                <div class="shift-val">Same constraint, different paths. Both alliances faced the same Indian foreign-investment rule. Walmart-Bharti stayed close to compliance, structured first to satisfy the regulation, with learning fitted into whatever space was left. Tesco-Trent moved differently, from a franchise into a more integrated joint venture, with more room to learn from its local partner. The same rule produced different outcomes, because how a firm reads and responds to a constraint over time is a managerial choice, not something the situation dictates. Seeing that changed how I read every case after it.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-num">02</div>
+          <div class="card-main">
+            <div class="card-type">Internship</div>
+            <h3>Internship at Golivea: Turkey market-entry strategy</h3>
+            <div class="card-meta">Pre-entry feasibility study · entry-mode recommendation</div>
+            <p class="card-body">A go/no-go and entry-mode study for a wellness brand entering the Turkish direct-selling market, analysed against the 2025 direct-selling regulation, a competitor landscape, and sourced market sizing. The recommendation favoured a joint-venture structure with a staged buy-out.</p>
+            <div class="card-shift">
+              <div class="shift-row shift-from">
+                <div class="shift-lab">Assumed</div>
+                <div class="shift-val">That a live commercial entry decision and an academic exercise were two different kinds of work.</div>
+              </div>
+              <div class="shift-row shift-to">
+                <div class="shift-lab">Changed</div>
+                <div class="shift-val">They were the same work. The study used the three theoretical lenses from my thesis on a real decision, and recommended a staged buy-out for the same reason the thesis treats governance as a managerial choice: it keeps learning reversible until the regulatory file is clean. Experience told me which questions mattered; the master year told me how to structure the answer.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-num">03</div>
+          <div class="card-main">
+            <div class="card-type">Empirical Study</div>
+            <h3>Global Innovation and Entrepreneurship: quantitative analysis</h3>
+            <div class="card-meta">Empirical study · organizational climate and satisfaction</div>
+            <p class="card-body">An empirical study of organizational climate and employee satisfaction across financial and non-financial industries, working in R. I led the analytical and methodological core of the work.</p>
+            <div class="card-shift">
+              <div class="shift-row shift-from">
+                <div class="shift-lab">Assumed</div>
+                <div class="shift-val">That the course was pulling in two directions. The lectures talked about business models and the idea that you do not need everything in place to start, you begin with what you have. The workshop handed us a database and asked us to build the analysis from the numbers. To me these felt contradictory, and I expected one of them to be the right approach.</div>
+              </div>
+              <div class="shift-row shift-to">
+                <div class="shift-lab">Changed</div>
+                <div class="shift-val">Working through the data resolved it. The most important input for a business decision is evidence, not assumption: you research the market and build on what the data actually shows. But the lectures were not wrong either. They were describing a different stage. Early on, a venture moves with whatever it has, because waiting for perfect information would mean never starting. As it grows and becomes more stable, it needs structure and data to keep making good decisions. The two halves were not in conflict. They described two stages of the same life, and learning to hold both at once changed how I think about when to act on instinct and when to demand evidence.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-num">04</div>
+          <div class="card-main">
+            <div class="card-type">Strategy Report</div>
+            <h3>International Management: Chipotle's expansion into Europe</h3>
+            <div class="card-meta">Report &amp; presentation · course grade 8.0, presentation 9.0</div>
+            <p class="card-body">An entry analysis for Chipotle's potential move into Europe: Porter's national diamond, four types of distance, a standardised country ranking across 31 European markets, deep-dives on Spain and Turkey, and a phased entry-mode recommendation. I led the analytical sections.</p>
+            <div class="card-shift">
+              <div class="shift-row shift-from">
+                <div class="shift-lab">Assumed</div>
+                <div class="shift-val">That my years of international management practice would translate straight into academic work on the same subject.</div>
+              </div>
+              <div class="shift-row shift-to">
+                <div class="shift-lab">Changed</div>
+                <div class="shift-val">For most of my career the frameworks arrived from headquarters and I applied them. Here I worked with the literature behind them. The analytical sections were mine; what the course added was the vocabulary to explain why the analysis was structured the way it was. Practice came first; theory caught up to it.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-num">05</div>
+          <div class="card-main">
+            <div class="card-type">Reflective Diary</div>
+            <h3>Leadership: Advanced Perspectives, reflective diary</h3>
+            <div class="card-meta">~5,500 words across eleven sessions · course grade 8.0</div>
+            <p class="card-body">A reflective diary examining, session by session, an assumption I held, an insight that challenged it, and a behavioural change. Topics ranged from psychological safety and paradoxical leadership to cross-cultural communication and moral decision-making.</p>
+            <div class="card-shift">
+              <div class="shift-row shift-from">
+                <div class="shift-lab">Assumed</div>
+                <div class="shift-val">That a consistent leadership style signals authenticity, that quiet listening always reads as respect, and that my Iranian and Japanese-influenced training would transfer to the Netherlands.</div>
+              </div>
+              <div class="shift-row shift-to">
+                <div class="shift-lab">Changed</div>
+                <div class="shift-val">Almost every session named a default I had not seen as a default. Authenticity can include adaptation. Silence read as respect in one culture can read as disengagement in another. It is the clearest record of the year's actual learning.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-num">06</div>
+          <div class="card-main">
+            <div class="card-type">Ethics Course</div>
+            <h3>Business Ethics: the reach of a decision</h3>
+            <div class="card-meta">Course on competing ethical frameworks applied to real corporate decisions</div>
+            <p class="card-body">A course examining how firms reason about right and wrong, working through competing ethical frameworks and applying them to real corporate decisions and their consequences for the people they touch.</p>
+            <div class="card-shift">
+              <div class="shift-row shift-from">
+                <div class="shift-lab">Assumed</div>
+                <div class="shift-val">That this would be a soft course, something to know about rather than work at, with little real reading and little bearing on me.</div>
+              </div>
+              <div class="shift-row shift-to">
+                <div class="shift-lab">Changed</div>
+                <div class="shift-val">It was demanding from the start, with a heavy reading load, and within a few sessions my view of it had turned around. I am not a CEO making decisions that move other people's lives, so at first the material felt distant. What I came to see is how far a company's decisions actually reach. A firm's strategy lands on employees, partners, and groups well beyond the people in the room making the choice, and a decision that looks sound from inside the company can carry real consequences for others. I started to think about decisions in terms of who they affect and how, not only whether they serve the firm. The course did not change what I do day to day. It changed the range of people I now consider when I judge whether a decision is a good one.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-next" class="close">
+      <div class="wrap">
+        <div class="eyebrow reveal">What comes next</div>
+        <p class="reveal">I am not entering the Dutch job market as a new graduate. I am entering it as someone with a substantial professional past who has to translate that past into a different context.</p>
+        <p class="pull reveal">The real work is learning how to translate experience, rather than assuming it carries. This year was where I learned to do it deliberately.</p>
+      </div>
+    </section>
+
+    <div class="site-foot reveal">
+      <div class="wrap">
+        <strong>Mehdi Samiee</strong><br>
+        MSc International Management · Vrije Universiteit Amsterdam · 2025–2026<br>
+        Amstelveen, Netherlands
+        <div class="credits">Hero image: Janko Ferlič on Unsplash.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <aside class="rail-right" aria-hidden="true">
+    <span class="dot"></span>
+    <span class="yr">Portfolio</span>
+    <span class="tick"></span>
+  </aside>
+
+</div>
+
+<script>
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const rail=document.querySelectorAll('.rail li');
+  const targets=[...rail].map(li=>document.getElementById(li.dataset.t)).filter(Boolean);
+  const railObs=new IntersectionObserver((es)=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        const id=e.target.id;
+        rail.forEach(li=>li.classList.toggle('on', li.dataset.t===id));
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  targets.forEach(t=>railObs.observe(t));
+  rail.forEach(li=>li.addEventListener('click',()=>{
+    document.getElementById(li.dataset.t)?.scrollIntoView({behavior:'smooth'});
+  }));
+</script>
+</body>
+</html>
